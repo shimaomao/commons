@@ -1,7 +1,6 @@
 package com.spike.commons.algorithm.bean.tree.heap;
 
-import org.junit.Assert;
-
+import com.google.common.base.Preconditions;
 import com.spike.commons.algorithm.bean.util.Expense;
 
 /**
@@ -38,7 +37,7 @@ public class MinHeap<E extends Comparable<? super E>> {
    * POST: <br/>
    */
   private void siftdown(int pos) {
-    Assert.assertTrue("Heap postion out of range", pos >= 0 && pos < n);
+    Preconditions.checkArgument(pos >= 0 && pos < n, "Heap postion out of range");
     while (!isLeaf(pos)) {
       int childPos = leftChild(pos);// 先选择左子节点位置
       if (childPos < (n - 1) && heap[childPos].compareTo(heap[childPos + 1]) > 0) {// 若右子节点值较小，选择右子节点
@@ -60,7 +59,7 @@ public class MinHeap<E extends Comparable<? super E>> {
    */
   @Expense(tag = Expense.TAG.Θ, value = "logn")
   public E removemin() {
-    Assert.assertTrue("Removing from empty heap", n > 0);
+    Preconditions.checkArgument(n > 0, "Removing from empty heap");
     swap(heap, 0, --n);// 将最大值(root)与最后一位交换
     if (n != 0) {
       siftdown(0);// 将新堆的root放置到正确的位置
@@ -74,7 +73,7 @@ public class MinHeap<E extends Comparable<? super E>> {
    * POST: <br/>
    */
   public E remove(int pos) {
-    Assert.assertTrue("Heap position out of range", pos >= 0 && pos < n);
+    Preconditions.checkArgument(pos >= 0 && pos < n, "Heap position out of range");
     if (pos == (n - 1)) {// 直接将堆最后一个值返回
       n--;
     } else {
@@ -110,17 +109,17 @@ public class MinHeap<E extends Comparable<? super E>> {
   }
 
   public int leftChild(int pos) {
-    Assert.assertTrue("Position has no left child", pos < n / 2);
+    Preconditions.checkArgument(pos < n / 2, "Position has no left child");
     return 2 * pos + 1;
   }
 
   public int rightChild(int pos) {
-    Assert.assertTrue("Position has no right child", pos < (n - 1) / 2);
+    Preconditions.checkArgument(pos < (n - 1) / 2, "Position has no right child");
     return 2 * pos + 2;
   }
 
   public int parent(int pos) {
-    Assert.assertTrue("Position has no parent", pos > 0);
+    Preconditions.checkArgument(pos > 0, "Position has no parent");
     return (pos - 1) / 2;
   }
 
@@ -131,7 +130,7 @@ public class MinHeap<E extends Comparable<? super E>> {
    */
   @Expense(tag = Expense.TAG.Θ, value = "logn")
   public void insert(E e) {
-    Assert.assertTrue("Heap is full", n < size);
+    Preconditions.checkArgument(n < size, "Heap is full");
     int curr = n++;
     heap[curr] = e;
     // 若curr的值小于其父节点的值，交换两者的位置

@@ -1,7 +1,6 @@
 package com.spike.commons.algorithm.bean.list.link;
 
-import org.junit.Assert;
-
+import com.google.common.base.Preconditions;
 import com.spike.commons.algorithm.bean.list.ListADT;
 import com.spike.commons.algorithm.bean.util.Expense;
 
@@ -125,7 +124,7 @@ public class LList<E> implements ListADT<E> {
   @Override
   @Expense(tag = Expense.TAG.Θ, value = "n")
   public void moveToPos(int pos) {
-    Assert.assertTrue("Out of range", pos >= 0 && pos < currentSize);
+    Preconditions.checkArgument(pos >= 0 && pos < currentSize, "Out of range");
     curr = head;
     for (int i = 0; i < pos; i++) {
       curr = curr.next();

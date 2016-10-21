@@ -1,7 +1,6 @@
 package com.spike.commons.algorithm.bean.list.array;
 
-import org.junit.Assert;
-
+import com.google.common.base.Preconditions;
 import com.spike.commons.algorithm.bean.list.ListADT;
 import com.spike.commons.algorithm.bean.util.Expense;
 
@@ -44,8 +43,7 @@ public class AList<E> implements ListADT<E> {
   @Override
   @Expense(tag = Expense.TAG.Θ, value = "n")
   public void insert(E item) {
-    Assert.assertTrue("List capacity exceeded!", listSize < maxSize);
-    // assert listSize < maxSize : "List capacity exceeded!";//前置条件断言
+    Preconditions.checkArgument(listSize < maxSize, "List capacity exceeded!");
     for (int i = listSize; i > curr; i--) {// 将[curr, listSize-1]向后移动一位
       listArray[i] = listArray[i - 1];
     }
@@ -60,7 +58,7 @@ public class AList<E> implements ListADT<E> {
   @Override
   @Expense(tag = Expense.TAG.Θ, value = "1")
   public void append(E item) {
-    Assert.assertTrue("List capacity exceeded!", listSize < maxSize);
+    Preconditions.checkArgument(listSize < maxSize, "List capacity exceeded!");
     listArray[listSize++] = item;
   }
 
@@ -123,14 +121,14 @@ public class AList<E> implements ListADT<E> {
   /* @see list.ListADT#moveToPos(int) */
   @Override
   public void moveToPos(int pos) {
-    Assert.assertTrue("Pos out of range", (pos >= 0) && (pos <= listSize));
+    Preconditions.checkArgument((pos >= 0) && (pos <= listSize), "Pos out of range");
     curr = pos;
   }
 
   /* @see list.ListADT#getValue() */
   @Override
   public E getValue() {
-    Assert.assertTrue("No current element", (curr >= 0) && (curr < listSize));
+    Preconditions.checkArgument((curr >= 0) && (curr < listSize), "No current element");
     return listArray[curr];
   }
 }
