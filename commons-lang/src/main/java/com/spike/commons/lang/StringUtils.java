@@ -7,14 +7,21 @@ package com.spike.commons.lang;
 public final class StringUtils extends org.apache.commons.lang3.StringUtils {
   /** 默认的填充符 */
   public static final String DEFAULT_PADDING = " ";
-  /** 换行符 */
-  public static final String NEWLINE = System.lineSeparator();
+
   /** 制表符 */
   public static final String TAB = "\t";
-  /** 文件路径分隔符 */
-  public static final String FILE_SEP = System.getProperty("file.separator");
+
   /** 逗号 */
   public static final String COMMA = ",";
+
+  /** 换行符 */
+  public static final String NEWLINE = System.lineSeparator();
+  /** 文件路径分隔符 */
+  public static final String FILE_SEP = System.getProperty("file.separator");
+  /** 默认文件编码 */
+  public static final String DEFAULT_FILE_ENCODING = System.getProperty("file.encoding");
+  /**用户Home*/
+  public static final String USER_HOME = System.getProperty("user.home");
 
   /**
    * left padding with `padding` to construct a `allLength` sized String value
