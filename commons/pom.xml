@@ -176,7 +176,6 @@
 				<version>0.9.1</version>
 			</dependency>
 
-
 			<!-- JUnit -->
 			<dependency>
 				<groupId>junit</groupId>

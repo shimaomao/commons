@@ -11,15 +11,29 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>com.spike</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>${commons.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+
+		<!-- Netty -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.6.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j </groupId>
+			<artifactId>slf4j-log4j12 </artifactId>
+			<version>1.7.2 </version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
