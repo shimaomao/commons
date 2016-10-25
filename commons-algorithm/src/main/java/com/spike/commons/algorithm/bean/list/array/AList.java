@@ -44,7 +44,10 @@ public class AList<E> implements ListADT<E> {
   @Expense(tag = Expense.TAG.Θ, value = "n")
   public void insert(E item) {
     Preconditions.checkArgument(listSize < maxSize, "List capacity exceeded!");
+<<<<<<< HEAD:commons-algorithm/src/main/java/com/spike/commons/algorithm/bean/list/array/AList.java
     // assert listSize < maxSize : "List capacity exceeded!";//前置条件断言
+=======
+>>>>>>> origin/master:src/main/java/com/spike/commons/algorithm/bean/list/array/AList.java
     for (int i = listSize; i > curr; i--) {// 将[curr, listSize-1]向后移动一位
       listArray[i] = listArray[i - 1];
     }
