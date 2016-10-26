@@ -16,6 +16,7 @@
 		<module>../commons-algorithm</module>
 		<module>../commons-test</module>
 		<module>../commons-example</module>
+		<module>../commons-cloud</module>
 	</modules>
 
 	<licenses>

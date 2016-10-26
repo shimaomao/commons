@@ -6,8 +6,11 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 
 import org.apache.log4j.Logger;
 
@@ -36,20 +39,25 @@ public class DiscardServer {
       // 启动Server的帮助类
       ServerBootstrap bootstrap = new ServerBootstrap();
 
-      bootstrap//
-          .group(masterGroup, workerGroup)//
-          .channel(NioServerSocketChannel.class)// 接收输入连接而实例化的channel
-          .childHandler(// 接收channel的handler
-            // 特殊的Handler,帮助用户配置新生成的channel
-            new ChannelInitializer<SocketChannel>() {
-              @Override
-              protected void initChannel(SocketChannel ch) throws Exception {
-                ch.pipeline().addLast(new DiscardServerHandler());
-              }
-            })//
-          .option(ChannelOption.SO_BACKLOG, 128)// 接收输入连接的channel配置项
-          .childOption(ChannelOption.SO_KEEPALIVE, true)// 接收的channel的配置项
-      ;
+      bootstrap.group(masterGroup, workerGroup);
+
+      bootstrap.channel(NioServerSocketChannel.class);// 接收输入连接而实例化的channel
+//      bootstrap.handler(new ChannelInitializer<ServerSocketChannel>() {
+//        @Override
+//        protected void initChannel(ServerSocketChannel ch) throws Exception { // 为每个新接入的客户端创建新的handler
+//          ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
+//        }
+//      });
+      bootstrap.option(ChannelOption.SO_BACKLOG, 128);// 接收输入连接的channel配置项
+
+      bootstrap.childHandler(// NioServerSocketChannel使用, 连接该监听端口的客户端使用
+          new ChannelInitializer<SocketChannel>() {// 特殊的Handler,帮助用户配置新生成的channel
+            @Override
+            protected void initChannel(SocketChannel ch) throws Exception {
+              ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG), new DiscardServerHandler());
+            }
+          });
+      bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);// 接收的channel的配置项
 
       // 绑定端口，开始接收输入连接
       // 可以绑定不同的端口而多次调用bind()
@@ -70,5 +78,4 @@ public class DiscardServer {
       masterGroup.shutdownGracefully();
     }
   }
-
 }
