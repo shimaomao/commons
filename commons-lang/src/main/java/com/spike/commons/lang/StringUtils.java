@@ -20,7 +20,7 @@ public final class StringUtils extends org.apache.commons.lang3.StringUtils {
   public static final String FILE_SEP = System.getProperty("file.separator");
   /** 默认文件编码 */
   public static final String DEFAULT_FILE_ENCODING = System.getProperty("file.encoding");
-  /**用户Home*/
+  /** 用户Home */
   public static final String USER_HOME = System.getProperty("user.home");
 
   /**

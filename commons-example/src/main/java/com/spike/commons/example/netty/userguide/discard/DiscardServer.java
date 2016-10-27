@@ -42,12 +42,13 @@ public class DiscardServer {
       bootstrap.group(masterGroup, workerGroup);
 
       bootstrap.channel(NioServerSocketChannel.class);// 接收输入连接而实例化的channel
-//      bootstrap.handler(new ChannelInitializer<ServerSocketChannel>() {
-//        @Override
-//        protected void initChannel(ServerSocketChannel ch) throws Exception { // 为每个新接入的客户端创建新的handler
-//          ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
-//        }
-//      });
+      // bootstrap.handler(new ChannelInitializer<ServerSocketChannel>() {
+      // @Override
+      // protected void initChannel(ServerSocketChannel ch) throws Exception { //
+      // 为每个新接入的客户端创建新的handler
+      // ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
+      // }
+      // });
       bootstrap.option(ChannelOption.SO_BACKLOG, 128);// 接收输入连接的channel配置项
 
       bootstrap.childHandler(// NioServerSocketChannel使用, 连接该监听端口的客户端使用

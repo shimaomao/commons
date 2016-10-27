@@ -15,8 +15,13 @@
 		<module>../commons-io</module>
 		<module>../commons-algorithm</module>
 		<module>../commons-test</module>
-		<module>../commons-example</module>
+		<!-- need to remove JUnit in src/main/java -->
+		<!-- <module>../commons-example</module> -->
 		<module>../commons-cloud</module>
+		<module>../commons-cloud-common</module>
+		<module>../commons-cloud-service</module>
+		<module>../commons-cloud-client</module>
+		<module>../commons-cloud-configuration</module>
 	</modules>
 
 	<licenses>

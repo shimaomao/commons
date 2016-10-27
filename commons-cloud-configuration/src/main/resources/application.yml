@@ -1,0 +1,10 @@
+
+spring.application.name: cloud-configuration
+server.port: 8888
+
+# 配置文件的名称
+#spring.config.name: 
+
+#spring.cloud.config.enabled: true
+spring.cloud.config.discovery.enabled: true
+spring.cloud.config.server.git.uri: file:///Users/jiedong/config-repo
