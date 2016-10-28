@@ -3,6 +3,8 @@ package com.spike.commons.lang;
 /**
  * 字符串工具类
  * @author zhoujiagen
+ * @see 
+ * @see java.lang.System.getProperties()
  */
 public final class StringUtils extends org.apache.commons.lang3.StringUtils {
   /** 默认的填充符 */
@@ -14,6 +16,7 @@ public final class StringUtils extends org.apache.commons.lang3.StringUtils {
   /** 逗号 */
   public static final String COMMA = ",";
 
+  // TODO add specific System.getProperties()
   /** 换行符 */
   public static final String NEWLINE = System.lineSeparator();
   /** 文件路径分隔符 */
@@ -22,7 +25,9 @@ public final class StringUtils extends org.apache.commons.lang3.StringUtils {
   public static final String DEFAULT_FILE_ENCODING = System.getProperty("file.encoding");
   /** 用户Home */
   public static final String USER_HOME = System.getProperty("user.home");
-
+  /** 用户当前目录 */
+  public static final String CWD = System.getProperty("user.dir");
+  
   /**
    * left padding with `padding` to construct a `allLength` sized String value
    * @param content

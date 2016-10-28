@@ -1,4 +1,4 @@
-package com.spike.commons.example.nio2.dir;
+package com.spike.commons.example.nio2.async.dir;
 
 import static org.junit.Assert.assertTrue;
 

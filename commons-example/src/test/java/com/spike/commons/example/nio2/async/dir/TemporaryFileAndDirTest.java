@@ -1,4 +1,4 @@
-package com.spike.commons.example.nio2.dir;
+package com.spike.commons.example.nio2.async.dir;
 
 import java.io.File;
 import java.nio.file.DirectoryStream;
