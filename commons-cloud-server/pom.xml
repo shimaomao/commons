@@ -7,23 +7,31 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../commons</relativePath>
 	</parent>
-	<artifactId>commons-cloud</artifactId>
+	<artifactId>commons-cloud-server</artifactId>
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Import dependency management from Spring Boot -->
 			<dependency>
-				<!-- Import dependency management from Spring Boot -->
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
 				<version>1.4.1.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<!-- spring-cloud-zookeeper -->
+
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-zookeeper-dependencies</artifactId>
-				<version>1.0.3.RELEASE</version>
+				<artifactId>spring-cloud-config</artifactId>
+				<version>1.2.1.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-netflix</artifactId>
+				<version>1.2.1.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -48,45 +56,14 @@
 		</dependency>
 		<!-- Spring Boot End -->
 
-		<!-- Spring Cloud Start -->
-		<!-- ZooKeeper -->
-		<!-- REF http://cloud.spring.io/spring-cloud-static/spring-cloud-zookeeper/1.0.3.RELEASE -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-zookeeper-discovery</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.reactivex</groupId>
-			<artifactId>rxjava</artifactId>
-			<version>1.1.5</version>
+			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zookeeper-config</artifactId>
+			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-zookeeper-config</artifactId>
-		</dependency>
-
-		<!-- Spring Cloud End -->
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
