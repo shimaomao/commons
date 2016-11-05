@@ -13,10 +13,13 @@ import com.spike.commons.example.nio.NIOUtil;
 import com.spike.commons.lang.StringUtils;
 
 /**
- * simple echo server<br/>
- * a single Selector is used to <br/>
- * (1)listen to the server socket and <br/>
+ * <pre>
+ * simple echo server
+ * 
+ * a single Selector is used to 
+ * (1)listen to the server socket and
  * (2)all the active socket channels
+ * </pre>
  * @author zhoujiagen
  */
 public class SelectableEchoSokcetServer {
@@ -136,7 +139,7 @@ public class SelectableEchoSokcetServer {
   private void registerChannel(Selector selector, SocketChannel socketChannel, int ops)
       throws Exception {
     if (socketChannel == null) {
-      return;// gaurd
+      return;// guard
     }
 
     socketChannel.configureBlocking(false);
