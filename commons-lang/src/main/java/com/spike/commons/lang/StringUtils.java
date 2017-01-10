@@ -3,7 +3,7 @@ package com.spike.commons.lang;
 /**
  * 字符串工具类
  * @author zhoujiagen
- * @see 
+ * @see
  * @see java.lang.System.getProperties()
  */
 public final class StringUtils extends org.apache.commons.lang3.StringUtils {
@@ -27,7 +27,7 @@ public final class StringUtils extends org.apache.commons.lang3.StringUtils {
   public static final String USER_HOME = System.getProperty("user.home");
   /** 用户当前目录 */
   public static final String CWD = System.getProperty("user.dir");
-  
+
   /**
    * left padding with `padding` to construct a `allLength` sized String value
    * @param content
