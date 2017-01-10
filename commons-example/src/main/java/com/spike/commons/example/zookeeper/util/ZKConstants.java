@@ -35,7 +35,7 @@ public class ZKConstants {
   public static final Watcher DEFAULT_WATCHER = new Watcher() {
     @Override
     public void process(WatchedEvent event) {
-      LOG.info("watched event: " + event);
+      LOG.info("default watcher watched event: " + event);
     }
   };
 

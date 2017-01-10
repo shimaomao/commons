@@ -18,6 +18,7 @@
     padding: 0 11px 0 11px
  }
 </style>
+
 # 1 Environment setup
 
 1 mater, 2 slaves setup locates in src/main/resources/quorum.tar.gz.

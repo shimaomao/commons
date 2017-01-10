@@ -25,11 +25,14 @@ public final class ZKUtils {
 
   private static String NEWLINE = System.lineSeparator();
 
+  /** 根路径 */
+  public static String ROOT_PATH = "/";
+
   /** 默认的watcher */
   private static final class DefaultWatcher implements Watcher {
     @Override
     public void process(WatchedEvent event) {
-      LOG.info("观察到事件: " + event);
+      LOG.info("默认的watcher观察到事件: " + event);
     }
   }
 
@@ -46,16 +49,18 @@ public final class ZKUtils {
       return;
     }
 
-    if (!root.startsWith("/")) {
-      root = "/" + root;
+    if (!root.startsWith(ROOT_PATH)) {
+      root = ROOT_PATH + root;
     }
 
     StringBuilder sb = new StringBuilder();
     sb.append(root + NEWLINE);
 
     try {
+      // 1 init handle
       ZK_HANDLE = new ZooKeeper(connectionString, 15000, new DefaultWatcher());
 
+      // 2 do process
       List<String> rootChildren = ZK_HANDLE.getChildren(root, false);
       if (CollectionUtils.isNotEmpty(rootChildren)) {
         for (String rootChild : rootChildren) {
@@ -72,6 +77,9 @@ public final class ZKUtils {
       for (String record : recordList) {
         System.out.println(record);
       }
+
+      // 3 close handle
+      ZK_HANDLE.close();
 
     } catch (Exception e) {
       LOG.error("查看树目录结构失败", e);
@@ -107,16 +115,17 @@ public final class ZKUtils {
       return null;
     }
 
-    if ("/".equals(root)) {
+    if (ROOT_PATH.equals(root)) {
       return root + child;
     } else {
-      return root + "/" + child;
+      return root + ROOT_PATH + child;
     }
 
   }
 
   public static void main(String[] args) throws KeeperException, InterruptedException {
-    listTree("127.0.0.1:2188", "/", 10);
+    listTree(ZKConstants.DEFAULT_QUORUM_CONN_STRING, ROOT_PATH, 10);
+    // listTree("127.0.0.1:2188", ROOT_PATH, 10);
     // listTree("127.0.0.1:2188", "/brokers", 10);
     // listTree("127.0.0.1:2188", "/brokers-nonexist", 10);
   }

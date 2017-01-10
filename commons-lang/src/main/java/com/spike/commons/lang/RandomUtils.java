@@ -46,4 +46,14 @@ public final class RandomUtils extends org.apache.commons.lang3.RandomUtils {
     return result;
   }
 
+  /**
+   * 返回随机的ID串，不指定时为小写
+   * @param idPattern
+   * @return
+   * @see #nextId(IdPattern)
+   */
+  public static String nextUUID(IdPattern idPattern) {
+    return nextId(idPattern);
+  }
+
 }

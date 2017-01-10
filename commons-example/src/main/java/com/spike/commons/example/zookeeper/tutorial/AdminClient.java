@@ -13,6 +13,10 @@ import org.slf4j.LoggerFactory;
 
 import com.spike.commons.example.zookeeper.util.ZKConstants;
 
+/**
+ * 管理客户端
+ * @author zhoujiagen
+ */
 public class AdminClient {
   private static final Logger LOG = LoggerFactory.getLogger(AdminClient.class);
 
