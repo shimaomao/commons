@@ -13,7 +13,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Enumeration;
 import java.util.TreeSet;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
+import com.spike.commons.lang.StringUtils;
 
 /**
  * 文件操作工具类
@@ -22,69 +27,83 @@ import java.util.TreeSet;
 public final class FileUtils {
 
   /**
-   * mock system <code>tree</code> command
-   * @param dirPath
+   * 查看压缩文件中内容, 支持zip, jar
+   * @param compressedFilePath
+   * @return
+   * @throws Exception
    */
-  public static final void tree(String dirPath) {
+  public static String lsCompressedFile(String compressedFilePath) throws Exception {
+    StringBuilder sb = new StringBuilder();
+
+    try (ZipFile zipFile = new ZipFile(compressedFilePath);) {
+      Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
+      while (zipEntries.hasMoreElements()) {
+        ZipEntry zipEntry = (ZipEntry) zipEntries.nextElement();
+        // System.out.println(zipEntry);
+        sb.append(zipEntry.getName()).append(StringUtils.NEWLINE);
+      }
+      return sb.toString();
+    }
+  }
+
+  /**
+   * 模拟操作系统tree命令
+   * @param dirPath
+   * @throws IOException
+   */
+  public static final void tree(String dirPath) throws IOException {
     if (!Files.isDirectory(Paths.get(dirPath), LinkOption.NOFOLLOW_LINKS)) {
       return;
     }
 
     FileVisitor<? super Path> visitor = new InnerFileVisitor(dirPath);
-    try {
-      Files.walkFileTree(Paths.get(dirPath), visitor);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    Files.walkFileTree(Paths.get(dirPath), visitor);
   }
 
   /**
-   * get all sub-directories
+   * 获取所有的子目录
    * @param dirPath The directory path
    * @return ordered (short) sub-directory name tree set
+   * @throws IOException
    */
-  public static final TreeSet<String> subPaths(final String dirPath) {
+  public static final TreeSet<String> subPaths(final String dirPath) throws IOException {
     if (!Files.isDirectory(Paths.get(dirPath), LinkOption.NOFOLLOW_LINKS)) {
       return null;
     }
     final TreeSet<String> result = new TreeSet<String>();
 
-    try {
-      Files.walkFileTree(Paths.get(dirPath), new FileVisitor<Path>() {
+    Files.walkFileTree(Paths.get(dirPath), new FileVisitor<Path>() {
 
-        @Override
-        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
-            throws IOException {
-          if (!Paths.get(dirPath).equals(dir)) {
-            String thisPath = dir.toAbsolutePath().toString();
-            thisPath = thisPath.substring(dirPath.length() + 1, thisPath.length());
+      @Override
+      public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+          throws IOException {
+        if (!Paths.get(dirPath).equals(dir)) {
+          String thisPath = dir.toAbsolutePath().toString();
+          thisPath = thisPath.substring(dirPath.length() - 1, thisPath.length());
 
-            result.add(thisPath);
-          }
-
-          return FileVisitResult.CONTINUE;
+          result.add(thisPath);
         }
 
-        @Override
-        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-          return FileVisitResult.CONTINUE;
-        }
+        return FileVisitResult.CONTINUE;
+      }
 
-        @Override
-        public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
-          if (exc != null) exc.printStackTrace();
-          return FileVisitResult.CONTINUE;
-        }
+      @Override
+      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        return FileVisitResult.CONTINUE;
+      }
 
-        @Override
-        public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-          if (exc != null) exc.printStackTrace();
-          return FileVisitResult.CONTINUE;
-        }
-      });
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+      @Override
+      public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+        if (exc != null) exc.printStackTrace();
+        return FileVisitResult.CONTINUE;
+      }
+
+      @Override
+      public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        if (exc != null) exc.printStackTrace();
+        return FileVisitResult.CONTINUE;
+      }
+    });
 
     return result;
   }
