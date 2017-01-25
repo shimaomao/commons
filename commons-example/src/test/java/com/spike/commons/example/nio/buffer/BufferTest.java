@@ -9,7 +9,6 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.IntBuffer;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.spike.commons.example.nio.NIOUtil;
@@ -317,9 +316,4 @@ public class BufferTest {
     assertEquals(21 - 12, slicedBuffer.capacity());
   }
 
-  @Deprecated
-  @Test
-  public void navie() {
-    Assert.assertTrue(true);
-  }
 }

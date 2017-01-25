@@ -127,15 +127,16 @@ public class NIOUtil {
    * properties and content of a buffer
    * @param buffer
    */
+  @Deprecated
   public static String detailsOfBuffer(Buffer buffer) {
     StringBuffer sb = new StringBuffer();
 
     sb.append("position=");
     sb.append(buffer.position());
-    sb.append(", limit=");
-    sb.append(buffer.limit());
     sb.append(", capacity=");
     sb.append(buffer.capacity());
+    sb.append(", limit=");
+    sb.append(buffer.limit());
     sb.append(": ").append(buffer.toString());
 
     return sb.toString();
