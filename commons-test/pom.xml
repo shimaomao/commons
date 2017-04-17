@@ -9,6 +9,11 @@
 	</parent>
 	<artifactId>commons-test</artifactId>
 
+	<!-- 项目属性 -->
+	<properties>
+		<guice.version>4.1.0</guice.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.spike</groupId>
@@ -21,6 +26,30 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commons.version}</version>
 		</dependency>
+
+		<!-- Google Guice START -->
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
+		<!-- extensions -->
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-throwingproviders</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-assistedinject</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-multibindings</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
+		<!-- Google Guice END -->
 
 		<dependency>
 			<groupId>junit</groupId>
